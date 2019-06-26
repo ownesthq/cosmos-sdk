@@ -62,5 +62,4 @@ func (root Root) Path() string {
 		path = path + "/" + string(inter)
 	}
 	return path
-
 }
