@@ -66,6 +66,7 @@ func (man Manager) object(id string) Object {
 		kind: state.NewString(man.protocol.Value([]byte(id + "/kind"))),
 
 		// CONTRACT: client must be filled by the caller
+
 	}
 }
 
