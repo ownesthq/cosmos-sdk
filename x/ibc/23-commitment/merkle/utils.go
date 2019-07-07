@@ -3,7 +3,6 @@ package merkle
 import (
 	"bytes"
 	"errors"
-	"fmt"
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
@@ -32,7 +31,6 @@ func (root Root) QueryMultiStore(cms types.CommitMultiStore, key []byte) (qres a
 // so need to be trimmed
 func (root Root) trimPrefix(key []byte) ([]byte, error) {
 	if !bytes.HasPrefix(key, root.KeyPrefix) {
-		fmt.Println(string(key), key, string(root.KeyPrefix), root.KeyPrefix)
 		return nil, errors.New("key not starting with root key prefix")
 	}
 	return bytes.TrimPrefix(key, root.KeyPrefix), nil
