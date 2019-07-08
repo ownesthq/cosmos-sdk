@@ -3,7 +3,7 @@ package genutil
 import (
 	"encoding/json"
 
-	"github.com/cosmos/cosmos-sdk/codec"
+	"github.com/ownesthq/cosmos-sdk/codec"
 )
 
 type (

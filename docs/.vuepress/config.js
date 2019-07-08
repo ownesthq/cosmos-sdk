@@ -8,7 +8,7 @@ module.exports = {
     lineNumbers: true
   },
   themeConfig: {
-    repo: "cosmos/cosmos-sdk",
+    repo: "ownesthq/cosmos-sdk",
     editLinks: true,
     docsDir: "docs",
     docsBranch: "develop",

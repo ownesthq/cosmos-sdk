@@ -35,9 +35,9 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/cosmos/cosmos-sdk/client/context"
-	"github.com/cosmos/cosmos-sdk/codec"
-	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/ownesthq/cosmos-sdk/client/context"
+	"github.com/ownesthq/cosmos-sdk/codec"
+	sdk "github.com/ownesthq/cosmos-sdk/types"
 )
 
 //__________________________________________________________________________________________

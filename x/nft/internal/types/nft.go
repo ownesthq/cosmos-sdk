@@ -6,7 +6,7 @@ import (
 	"sort"
 	"strings"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
+	sdk "github.com/ownesthq/cosmos-sdk/types"
 )
 
 // NFT non fungible token interface

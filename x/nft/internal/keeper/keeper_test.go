@@ -3,7 +3,7 @@ package keeper
 import (
 	"testing"
 
-	"github.com/cosmos/cosmos-sdk/x/nft/internal/types"
+	"github.com/ownesthq/cosmos-sdk/x/nft/internal/types"
 	"github.com/stretchr/testify/require"
 )
 

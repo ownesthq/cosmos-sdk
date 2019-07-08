@@ -4,9 +4,9 @@ import (
 	"errors"
 	"fmt"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/cosmos/cosmos-sdk/x/auth/exported"
-	"github.com/cosmos/cosmos-sdk/x/bank/internal/types"
+	sdk "github.com/ownesthq/cosmos-sdk/types"
+	"github.com/ownesthq/cosmos-sdk/x/auth/exported"
+	"github.com/ownesthq/cosmos-sdk/x/bank/internal/types"
 )
 
 // register bank invariants

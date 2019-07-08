@@ -1,7 +1,7 @@
 package v036
 
 import (
-	v034gov "github.com/cosmos/cosmos-sdk/x/gov/legacy/v034"
+	v034gov "github.com/ownesthq/cosmos-sdk/x/gov/legacy/v034"
 )
 
 func MigrateGovernance(initialState v034gov.GenesisState) GenesisState {

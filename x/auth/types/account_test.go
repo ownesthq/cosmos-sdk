@@ -8,8 +8,8 @@ import (
 
 	tmtime "github.com/tendermint/tendermint/types/time"
 
-	"github.com/cosmos/cosmos-sdk/codec"
-	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/ownesthq/cosmos-sdk/codec"
+	sdk "github.com/ownesthq/cosmos-sdk/types"
 )
 
 var (

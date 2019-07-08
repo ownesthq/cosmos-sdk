@@ -1,9 +1,9 @@
 package keeper
 
 import (
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/cosmos/cosmos-sdk/x/supply/exported"
-	"github.com/cosmos/cosmos-sdk/x/supply/internal/types"
+	sdk "github.com/ownesthq/cosmos-sdk/types"
+	"github.com/ownesthq/cosmos-sdk/x/supply/exported"
+	"github.com/ownesthq/cosmos-sdk/x/supply/internal/types"
 )
 
 // GetModuleAddress returns a an address  based on the name

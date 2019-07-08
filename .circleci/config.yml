@@ -1,7 +1,7 @@
 version: 2
 
 defaults: &linux_defaults
-  working_directory: /go/src/github.com/cosmos/cosmos-sdk
+  working_directory: /go/src/github.com/ownesthq/cosmos-sdk
   docker:
     - image: circleci/golang:1.12.5
 
@@ -94,7 +94,7 @@ jobs:
           name: Test application import/export simulation
           command: |
             export GO111MODULE=on
-            /tmp/workspace/bin/runsim -j 4 github.com/cosmos/cosmos-sdk/simapp 50 5 TestAppImportExport
+            /tmp/workspace/bin/runsim -j 4 github.com/ownesthq/cosmos-sdk/simapp 50 5 TestAppImportExport
 
   test_sim_app_simulation_after_import:
     <<: *linux_defaults
@@ -110,7 +110,7 @@ jobs:
           name: Test application import/export simulation
           command: |
             export GO111MODULE=on
-            /tmp/workspace/bin/runsim -j 4 github.com/cosmos/cosmos-sdk/simapp 50 5 TestAppSimulationAfterImport
+            /tmp/workspace/bin/runsim -j 4 github.com/ownesthq/cosmos-sdk/simapp 50 5 TestAppSimulationAfterImport
 
   test_sim_app_multi_seed_long:
     <<: *linux_defaults
@@ -126,7 +126,7 @@ jobs:
           name: Test multi-seed application simulation long
           command: |
             export GO111MODULE=on
-            /tmp/workspace/bin/runsim -j 4 github.com/cosmos/cosmos-sdk/simapp 500 50 TestFullAppSimulation
+            /tmp/workspace/bin/runsim -j 4 github.com/ownesthq/cosmos-sdk/simapp 500 50 TestFullAppSimulation
 
   test_sim_app_multi_seed:
     <<: *linux_defaults
@@ -142,7 +142,7 @@ jobs:
           name: Test multi-seed application simulation short
           command: |
             export GO111MODULE=on
-            /tmp/workspace/bin/runsim -j 4 github.com/cosmos/cosmos-sdk/simapp 50 10 TestFullAppSimulation
+            /tmp/workspace/bin/runsim -j 4 github.com/ownesthq/cosmos-sdk/simapp 50 10 TestFullAppSimulation
 
   test_cover:
     <<: *linux_defaults

@@ -15,9 +15,9 @@ import (
 	"github.com/tendermint/tendermint/crypto"
 	"github.com/tendermint/tendermint/crypto/secp256k1"
 
-	"github.com/cosmos/cosmos-sdk/client/context"
-	"github.com/cosmos/cosmos-sdk/codec"
-	"github.com/cosmos/cosmos-sdk/types"
+	"github.com/ownesthq/cosmos-sdk/client/context"
+	"github.com/ownesthq/cosmos-sdk/codec"
+	"github.com/ownesthq/cosmos-sdk/types"
 )
 
 type mockResponseWriter struct{}

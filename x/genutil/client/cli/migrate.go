@@ -7,11 +7,11 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/tendermint/tendermint/types"
 
-	"github.com/cosmos/cosmos-sdk/codec"
-	"github.com/cosmos/cosmos-sdk/server"
-	"github.com/cosmos/cosmos-sdk/version"
-	extypes "github.com/cosmos/cosmos-sdk/x/genutil"
-	"github.com/cosmos/cosmos-sdk/x/genutil/legacy/v036"
+	"github.com/ownesthq/cosmos-sdk/codec"
+	"github.com/ownesthq/cosmos-sdk/server"
+	"github.com/ownesthq/cosmos-sdk/version"
+	extypes "github.com/ownesthq/cosmos-sdk/x/genutil"
+	"github.com/ownesthq/cosmos-sdk/x/genutil/legacy/v036"
 )
 
 var migrationMap = extypes.MigrationMap{

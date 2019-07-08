@@ -1,10 +1,10 @@
 package v036
 
 import (
-	"github.com/cosmos/cosmos-sdk/codec"
-	"github.com/cosmos/cosmos-sdk/x/genutil"
-	v034gov "github.com/cosmos/cosmos-sdk/x/gov/legacy/v034"
-	v036gov "github.com/cosmos/cosmos-sdk/x/gov/legacy/v036"
+	"github.com/ownesthq/cosmos-sdk/codec"
+	"github.com/ownesthq/cosmos-sdk/x/genutil"
+	v034gov "github.com/ownesthq/cosmos-sdk/x/gov/legacy/v034"
+	v036gov "github.com/ownesthq/cosmos-sdk/x/gov/legacy/v036"
 )
 
 // Migrate migrates exported state from v0.34 to a v0.36 genesis state.

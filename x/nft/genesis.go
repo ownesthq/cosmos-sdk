@@ -1,7 +1,7 @@
 package nft
 
 import (
-	sdk "github.com/cosmos/cosmos-sdk/types"
+	sdk "github.com/ownesthq/cosmos-sdk/types"
 )
 
 // InitGenesis sets distribution information for genesis.

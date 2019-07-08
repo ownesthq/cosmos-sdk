@@ -8,9 +8,9 @@ import (
 	cmn "github.com/tendermint/tendermint/libs/common"
 	dbm "github.com/tendermint/tendermint/libs/db"
 
-	"github.com/cosmos/cosmos-sdk/store/cachekv"
-	"github.com/cosmos/cosmos-sdk/store/dbadapter"
-	"github.com/cosmos/cosmos-sdk/store/types"
+	"github.com/ownesthq/cosmos-sdk/store/cachekv"
+	"github.com/ownesthq/cosmos-sdk/store/dbadapter"
+	"github.com/ownesthq/cosmos-sdk/store/types"
 )
 
 func newCacheKVStore() types.CacheKVStore {

@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	params "github.com/cosmos/cosmos-sdk/x/params/subspace"
+	sdk "github.com/ownesthq/cosmos-sdk/types"
+	params "github.com/ownesthq/cosmos-sdk/x/params/subspace"
 )
 
 // Parameter store key

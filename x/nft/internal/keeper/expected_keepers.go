@@ -1,7 +1,7 @@
 package keeper
 
 import (
-	sdk "github.com/cosmos/cosmos-sdk/types"
+	sdk "github.com/ownesthq/cosmos-sdk/types"
 )
 
 // CrisisKeeper defines the expected crisis keeper

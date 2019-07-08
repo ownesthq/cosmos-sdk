@@ -7,14 +7,14 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
-	"github.com/cosmos/cosmos-sdk/client"
-	"github.com/cosmos/cosmos-sdk/client/context"
-	"github.com/cosmos/cosmos-sdk/client/flags"
-	"github.com/cosmos/cosmos-sdk/codec"
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/cosmos/cosmos-sdk/types/rest"
-	"github.com/cosmos/cosmos-sdk/x/auth/client/utils"
-	"github.com/cosmos/cosmos-sdk/x/auth/types"
+	"github.com/ownesthq/cosmos-sdk/client"
+	"github.com/ownesthq/cosmos-sdk/client/context"
+	"github.com/ownesthq/cosmos-sdk/client/flags"
+	"github.com/ownesthq/cosmos-sdk/codec"
+	sdk "github.com/ownesthq/cosmos-sdk/types"
+	"github.com/ownesthq/cosmos-sdk/types/rest"
+	"github.com/ownesthq/cosmos-sdk/x/auth/client/utils"
+	"github.com/ownesthq/cosmos-sdk/x/auth/types"
 
 	tmtypes "github.com/tendermint/tendermint/types"
 )

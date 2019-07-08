@@ -1,7 +1,7 @@
 package types
 
 import (
-	"github.com/cosmos/cosmos-sdk/codec"
+	"github.com/ownesthq/cosmos-sdk/codec"
 )
 
 // module codec

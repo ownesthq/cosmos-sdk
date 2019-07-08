@@ -48,7 +48,7 @@ Usage
 
 To execute a completely pseudo-random simulation:
 
- $ go test -mod=readonly github.com/cosmos/cosmos-sdk/simapp \
+ $ go test -mod=readonly github.com/ownesthq/cosmos-sdk/simapp \
 	-run=TestFullAppSimulation \
 	-SimulationEnabled=true \
 	-SimulationNumBlocks=100 \
@@ -60,7 +60,7 @@ To execute a completely pseudo-random simulation:
 
 To execute simulation from a genesis file:
 
- $ go test -mod=readonly github.com/cosmos/cosmos-sdk/simapp \
+ $ go test -mod=readonly github.com/ownesthq/cosmos-sdk/simapp \
  	-run=TestFullAppSimulation \
  	-SimulationEnabled=true \
  	-SimulationNumBlocks=100 \
@@ -73,7 +73,7 @@ To execute simulation from a genesis file:
 
 To execute simulation from a params file:
 
- $ go test -mod=readonly github.com/cosmos/cosmos-sdk/simapp \
+ $ go test -mod=readonly github.com/ownesthq/cosmos-sdk/simapp \
 	-run=TestFullAppSimulation \
 	-SimulationEnabled=true \
 	-SimulationNumBlocks=100 \

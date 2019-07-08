@@ -5,12 +5,12 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/cosmos/cosmos-sdk/x/auth"
-	"github.com/cosmos/cosmos-sdk/x/bank"
-	"github.com/cosmos/cosmos-sdk/x/bank/internal/keeper"
-	"github.com/cosmos/cosmos-sdk/x/bank/internal/types"
-	"github.com/cosmos/cosmos-sdk/x/mock"
+	sdk "github.com/ownesthq/cosmos-sdk/types"
+	"github.com/ownesthq/cosmos-sdk/x/auth"
+	"github.com/ownesthq/cosmos-sdk/x/bank"
+	"github.com/ownesthq/cosmos-sdk/x/bank/internal/keeper"
+	"github.com/ownesthq/cosmos-sdk/x/bank/internal/types"
+	"github.com/ownesthq/cosmos-sdk/x/mock"
 )
 
 // getBenchmarkMockApp initializes a mock application for this module, for purposes of benchmarking

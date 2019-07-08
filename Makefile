@@ -6,7 +6,7 @@ VERSION := $(shell echo $(shell git describe --tags) | sed 's/^v//')
 COMMIT := $(shell git log -1 --format='%H')
 LEDGER_ENABLED ?= true
 BINDIR ?= $(GOPATH)/bin
-SIMAPP = github.com/cosmos/cosmos-sdk/simapp
+SIMAPP = github.com/ownesthq/cosmos-sdk/simapp
 MOCKS_DIR = $(CURDIR)/tests/mocks
 
 export GO111MODULE = on
@@ -65,7 +65,7 @@ distclean: clean
 ### Documentation
 
 godocs:
-	@echo "--> Wait a few seconds and visit http://localhost:6060/pkg/github.com/cosmos/cosmos-sdk/types"
+	@echo "--> Wait a few seconds and visit http://localhost:6060/pkg/github.com/ownesthq/cosmos-sdk/types"
 	godoc -http=:6060
 
 
@@ -75,10 +75,10 @@ godocs:
 test: test_unit
 
 test_ledger_mock:
-		@go test -mod=readonly `go list github.com/cosmos/cosmos-sdk/crypto` -tags='cgo ledger test_ledger_mock'
+		@go test -mod=readonly `go list github.com/ownesthq/cosmos-sdk/crypto` -tags='cgo ledger test_ledger_mock'
 
 test_ledger: test_ledger_mock
-	@go test -mod=readonly -v `go list github.com/cosmos/cosmos-sdk/crypto` -tags='cgo ledger'
+	@go test -mod=readonly -v `go list github.com/ownesthq/cosmos-sdk/crypto` -tags='cgo ledger'
 
 test_unit:
 	@VERSION=$(VERSION) go test -mod=readonly $(PACKAGES_NOSIMULATION) -tags='ledger test_ledger_mock'
@@ -126,7 +126,7 @@ test_sim_benchmark_invariants:
 # Don't move it into tools - this will be gone once gaia has moved into the new repo
 runsim: $(BINDIR)/runsim
 $(BINDIR)/runsim: contrib/runsim/main.go contrib/runsim/notification.go
-	go install github.com/cosmos/cosmos-sdk/contrib/runsim
+	go install github.com/ownesthq/cosmos-sdk/contrib/runsim
 
 SIM_NUM_BLOCKS ?= 500
 SIM_BLOCK_SIZE ?= 200
@@ -153,7 +153,7 @@ lint: golangci-lint
 format: tools
 	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -path "./client/lcd/statik/statik.go" | xargs gofmt -w -s
 	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -path "./client/lcd/statik/statik.go" | xargs misspell -w
-	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -path "./client/lcd/statik/statik.go" | xargs goimports -w -local github.com/cosmos/cosmos-sdk
+	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -path "./client/lcd/statik/statik.go" | xargs goimports -w -local github.com/ownesthq/cosmos-sdk
 
 benchmark:
 	@go test -mod=readonly -bench=. $(PACKAGES_NOSIMULATION)
@@ -165,12 +165,12 @@ benchmark:
 DEVDOC_SAVE = docker commit `docker ps -a -n 1 -q` devdoc:local
 
 devdoc_init:
-	docker run -it -v "$(CURDIR):/go/src/github.com/cosmos/cosmos-sdk" -w "/go/src/github.com/cosmos/cosmos-sdk" tendermint/devdoc echo
+	docker run -it -v "$(CURDIR):/go/src/github.com/ownesthq/cosmos-sdk" -w "/go/src/github.com/ownesthq/cosmos-sdk" tendermint/devdoc echo
 	# TODO make this safer
 	$(call DEVDOC_SAVE)
 
 devdoc:
-	docker run -it -v "$(CURDIR):/go/src/github.com/cosmos/cosmos-sdk" -w "/go/src/github.com/cosmos/cosmos-sdk" devdoc:local bash
+	docker run -it -v "$(CURDIR):/go/src/github.com/ownesthq/cosmos-sdk" -w "/go/src/github.com/ownesthq/cosmos-sdk" devdoc:local bash
 
 devdoc_save:
 	# TODO make this safer

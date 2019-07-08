@@ -19,27 +19,27 @@ import (
 	"github.com/tendermint/tendermint/libs/log"
 	tmtypes "github.com/tendermint/tendermint/types"
 
-	"github.com/cosmos/cosmos-sdk/baseapp"
-	"github.com/cosmos/cosmos-sdk/codec"
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/cosmos/cosmos-sdk/x/auth"
-	authsim "github.com/cosmos/cosmos-sdk/x/auth/simulation"
-	"github.com/cosmos/cosmos-sdk/x/bank"
-	distr "github.com/cosmos/cosmos-sdk/x/distribution"
-	distrsim "github.com/cosmos/cosmos-sdk/x/distribution/simulation"
-	"github.com/cosmos/cosmos-sdk/x/genaccounts"
-	"github.com/cosmos/cosmos-sdk/x/gov"
-	govsim "github.com/cosmos/cosmos-sdk/x/gov/simulation"
-	"github.com/cosmos/cosmos-sdk/x/mint"
+	"github.com/ownesthq/cosmos-sdk/baseapp"
+	"github.com/ownesthq/cosmos-sdk/codec"
+	sdk "github.com/ownesthq/cosmos-sdk/types"
+	"github.com/ownesthq/cosmos-sdk/x/auth"
+	authsim "github.com/ownesthq/cosmos-sdk/x/auth/simulation"
+	"github.com/ownesthq/cosmos-sdk/x/bank"
+	distr "github.com/ownesthq/cosmos-sdk/x/distribution"
+	distrsim "github.com/ownesthq/cosmos-sdk/x/distribution/simulation"
+	"github.com/ownesthq/cosmos-sdk/x/genaccounts"
+	"github.com/ownesthq/cosmos-sdk/x/gov"
+	govsim "github.com/ownesthq/cosmos-sdk/x/gov/simulation"
+	"github.com/ownesthq/cosmos-sdk/x/mint"
 
-	"github.com/cosmos/cosmos-sdk/x/nft"
-	paramsim "github.com/cosmos/cosmos-sdk/x/params/simulation"
-	"github.com/cosmos/cosmos-sdk/x/simulation"
-	"github.com/cosmos/cosmos-sdk/x/slashing"
-	slashingsim "github.com/cosmos/cosmos-sdk/x/slashing/simulation"
-	"github.com/cosmos/cosmos-sdk/x/staking"
-	stakingsim "github.com/cosmos/cosmos-sdk/x/staking/simulation"
-	"github.com/cosmos/cosmos-sdk/x/supply"
+	"github.com/ownesthq/cosmos-sdk/x/nft"
+	paramsim "github.com/ownesthq/cosmos-sdk/x/params/simulation"
+	"github.com/ownesthq/cosmos-sdk/x/simulation"
+	"github.com/ownesthq/cosmos-sdk/x/slashing"
+	slashingsim "github.com/ownesthq/cosmos-sdk/x/slashing/simulation"
+	"github.com/ownesthq/cosmos-sdk/x/staking"
+	stakingsim "github.com/ownesthq/cosmos-sdk/x/staking/simulation"
+	"github.com/ownesthq/cosmos-sdk/x/supply"
 )
 
 var (
@@ -838,7 +838,7 @@ func testAndRunTxs(app *SimApp) []simulation.WeightedOperation {
 
 func invariants(app *SimApp) []sdk.Invariant {
 	// TODO: fix PeriodicInvariants, it doesn't seem to call individual invariants for a period of 1
-	// Ref: https://github.com/cosmos/cosmos-sdk/issues/4631
+	// Ref: https://github.com/ownesthq/cosmos-sdk/issues/4631
 	if period == 1 {
 		return app.crisisKeeper.Invariants()
 	}
@@ -851,7 +851,7 @@ func fauxMerkleModeOpt(bapp *baseapp.BaseApp) {
 }
 
 // Profile with:
-// /usr/local/go/bin/go test -benchmem -run=^$ github.com/cosmos/cosmos-sdk/simapp -bench ^BenchmarkFullAppSimulation$ -SimulationCommit=true -cpuprofile cpu.out
+// /usr/local/go/bin/go test -benchmem -run=^$ github.com/ownesthq/cosmos-sdk/simapp -bench ^BenchmarkFullAppSimulation$ -SimulationCommit=true -cpuprofile cpu.out
 func BenchmarkFullAppSimulation(b *testing.B) {
 	logger := log.NewNopLogger()
 

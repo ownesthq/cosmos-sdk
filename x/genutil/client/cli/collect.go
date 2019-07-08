@@ -9,10 +9,10 @@ import (
 	"github.com/tendermint/tendermint/libs/cli"
 	tmtypes "github.com/tendermint/tendermint/types"
 
-	"github.com/cosmos/cosmos-sdk/client"
-	"github.com/cosmos/cosmos-sdk/codec"
-	"github.com/cosmos/cosmos-sdk/server"
-	"github.com/cosmos/cosmos-sdk/x/genutil"
+	"github.com/ownesthq/cosmos-sdk/client"
+	"github.com/ownesthq/cosmos-sdk/codec"
+	"github.com/ownesthq/cosmos-sdk/server"
+	"github.com/ownesthq/cosmos-sdk/x/genutil"
 )
 
 const flagGenTxDir = "gentx-dir"

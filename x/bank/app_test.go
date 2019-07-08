@@ -3,13 +3,13 @@ package bank_test
 import (
 	"testing"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/cosmos/cosmos-sdk/x/auth"
-	"github.com/cosmos/cosmos-sdk/x/bank"
-	"github.com/cosmos/cosmos-sdk/x/bank/internal/keeper"
-	"github.com/cosmos/cosmos-sdk/x/bank/internal/types"
-	"github.com/cosmos/cosmos-sdk/x/mock"
-	"github.com/cosmos/cosmos-sdk/x/supply"
+	sdk "github.com/ownesthq/cosmos-sdk/types"
+	"github.com/ownesthq/cosmos-sdk/x/auth"
+	"github.com/ownesthq/cosmos-sdk/x/bank"
+	"github.com/ownesthq/cosmos-sdk/x/bank/internal/keeper"
+	"github.com/ownesthq/cosmos-sdk/x/bank/internal/types"
+	"github.com/ownesthq/cosmos-sdk/x/mock"
+	"github.com/ownesthq/cosmos-sdk/x/supply"
 
 	"github.com/stretchr/testify/require"
 

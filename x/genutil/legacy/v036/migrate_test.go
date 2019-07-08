@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/require"
 	"github.com/tendermint/go-amino"
 
-	"github.com/cosmos/cosmos-sdk/x/genutil"
+	"github.com/ownesthq/cosmos-sdk/x/genutil"
 )
 
 var basic034Gov = []byte(`
