@@ -14,14 +14,12 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/auth/types"
 )
 
-// QueryTxsByEvents performs a search for transactions for a given set of events
-// via the Tendermint RPC. An event takes the form of:
-// "{eventAttribute}.{attributeKey} = '{attributeValue}'". Each event is
-// concatenated with an 'AND' operand. It returns a slice of Info object
-// containing txs and metadata. An error is returned if the query fails.
-func QueryTxsByEvents(cliCtx context.CLIContext, events []string, page, limit int) (*sdk.SearchTxsResult, error) {
-	if len(events) == 0 {
-		return nil, errors.New("must declare at least one event to search")
+// QueryTxsByTags performs a search for transactions for a given set of tags via
+// Tendermint RPC. It returns a slice of Info object containing txs and metadata.
+// An error is returned if the query fails.
+func QueryTxsByTags(cliCtx context.CLIContext, tags []string, page, limit int) (*sdk.SearchTxsResult, error) {
+	if len(tags) == 0 {
+		return nil, errors.New("must declare at least one tag to search")
 	}
 
 	if page <= 0 {
@@ -33,7 +31,7 @@ func QueryTxsByEvents(cliCtx context.CLIContext, events []string, page, limit in
 	}
 
 	// XXX: implement ANY
-	query := strings.Join(events, " AND ")
+	query := strings.Join(tags, " AND ")
 
 	node, err := cliCtx.GetNode()
 	if err != nil {

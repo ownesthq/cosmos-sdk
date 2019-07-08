@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/hex"
 	"fmt"
+	"time"
 
 	"github.com/tendermint/tendermint/crypto/ed25519"
 
@@ -13,7 +14,6 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/cosmos/cosmos-sdk/x/auth/types"
 )
 
 var (
@@ -35,14 +35,10 @@ type SignatureVerificationGasConsumer = func(meter sdk.GasMeter, sig []byte, pub
 // NewAnteHandler returns an AnteHandler that checks and increments sequence
 // numbers, checks signatures & account numbers, and deducts fees from the first
 // signer.
-func NewAnteHandler(ak AccountKeeper, supplyKeeper types.SupplyKeeper, sigGasConsumer SignatureVerificationGasConsumer) sdk.AnteHandler {
+func NewAnteHandler(ak AccountKeeper, fck FeeCollectionKeeper, sigGasConsumer SignatureVerificationGasConsumer) sdk.AnteHandler {
 	return func(
 		ctx sdk.Context, tx sdk.Tx, simulate bool,
 	) (newCtx sdk.Context, res sdk.Result, abort bool) {
-
-		if addr := supplyKeeper.GetModuleAddress(types.FeeCollectorName); addr == nil {
-			panic(fmt.Sprintf("%s module account has not been set", types.FeeCollectorName))
-		}
 
 		// all transactions must be of type auth.StdTx
 		stdTx, ok := tx.(StdTx)
@@ -116,15 +112,13 @@ func NewAnteHandler(ak AccountKeeper, supplyKeeper types.SupplyKeeper, sigGasCon
 			return newCtx, res, true
 		}
 
-		// deduct the fees
 		if !stdTx.Fee.Amount.IsZero() {
-			res = DeductFees(supplyKeeper, newCtx, signerAccs[0], stdTx.Fee.Amount)
+			signerAccs[0], res = DeductFees(ctx.BlockHeader().Time, signerAccs[0], stdTx.Fee)
 			if !res.IsOK() {
 				return newCtx, res, true
 			}
 
-			// reload the account as fees have been deducted
-			signerAccs[0] = ak.GetAccount(newCtx, signerAccs[0].GetAddress())
+			fck.AddCollectedFees(newCtx, stdTx.Fee.Amount)
 		}
 
 		// stdSigs contains the sequence number, account number, and signatures.
@@ -333,37 +327,36 @@ func consumeMultisignatureVerificationGas(meter sdk.GasMeter,
 //
 // NOTE: We could use the CoinKeeper (in addition to the AccountKeeper, because
 // the CoinKeeper doesn't give us accounts), but it seems easier to do this.
-func DeductFees(supplyKeeper types.SupplyKeeper, ctx sdk.Context, acc Account, fees sdk.Coins) sdk.Result {
-	blockTime := ctx.BlockHeader().Time
+func DeductFees(blockTime time.Time, acc Account, fee StdFee) (Account, sdk.Result) {
 	coins := acc.GetCoins()
+	feeAmount := fee.Amount
 
-	if !fees.IsValid() {
-		return sdk.ErrInsufficientFee(fmt.Sprintf("invalid fee amount: %s", fees)).Result()
+	if !feeAmount.IsValid() {
+		return nil, sdk.ErrInsufficientFee(fmt.Sprintf("invalid fee amount: %s", feeAmount)).Result()
 	}
 
-	// verify the account has enough funds to pay for fees
-	_, hasNeg := coins.SafeSub(fees)
-	if hasNeg {
-		return sdk.ErrInsufficientFunds(
-			fmt.Sprintf("insufficient funds to pay for fees; %s < %s", coins, fees),
+	// get the resulting coins deducting the fees
+	newCoins, ok := coins.SafeSub(feeAmount)
+	if ok {
+		return nil, sdk.ErrInsufficientFunds(
+			fmt.Sprintf("insufficient funds to pay for fees; %s < %s", coins, feeAmount),
 		).Result()
 	}
 
 	// Validate the account has enough "spendable" coins as this will cover cases
 	// such as vesting accounts.
 	spendableCoins := acc.SpendableCoins(blockTime)
-	if _, hasNeg := spendableCoins.SafeSub(fees); hasNeg {
-		return sdk.ErrInsufficientFunds(
-			fmt.Sprintf("insufficient funds to pay for fees; %s < %s", spendableCoins, fees),
+	if _, hasNeg := spendableCoins.SafeSub(feeAmount); hasNeg {
+		return nil, sdk.ErrInsufficientFunds(
+			fmt.Sprintf("insufficient funds to pay for fees; %s < %s", spendableCoins, feeAmount),
 		).Result()
 	}
 
-	err := supplyKeeper.SendCoinsFromAccountToModule(ctx, acc.GetAddress(), types.FeeCollectorName, fees)
-	if err != nil {
-		return err.Result()
+	if err := acc.SetCoins(newCoins); err != nil {
+		return nil, sdk.ErrInternal(err.Error()).Result()
 	}
 
-	return sdk.Result{}
+	return acc, sdk.Result{}
 }
 
 // EnsureSufficientMempoolFees verifies that the given transaction has supplied

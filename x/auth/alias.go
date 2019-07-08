@@ -5,14 +5,13 @@
 package auth
 
 import (
-	"github.com/cosmos/cosmos-sdk/x/auth/exported"
 	"github.com/cosmos/cosmos-sdk/x/auth/types"
 )
 
 const (
 	ModuleName                    = types.ModuleName
 	StoreKey                      = types.StoreKey
-	FeeCollectorName              = types.FeeCollectorName
+	FeeStoreKey                   = types.FeeStoreKey
 	QuerierRoute                  = types.QuerierRoute
 	DefaultParamspace             = types.DefaultParamspace
 	DefaultMaxMemoCharacters      = types.DefaultMaxMemoCharacters
@@ -34,6 +33,8 @@ var (
 	NewDelayedVestingAccountRaw    = types.NewDelayedVestingAccountRaw
 	NewDelayedVestingAccount       = types.NewDelayedVestingAccount
 	RegisterCodec                  = types.RegisterCodec
+	RegisterBaseAccount            = types.RegisterBaseAccount
+	NewFeeCollectionKeeper         = types.NewFeeCollectionKeeper
 	NewGenesisState                = types.NewGenesisState
 	DefaultGenesisState            = types.DefaultGenesisState
 	ValidateGenesis                = types.ValidateGenesis
@@ -51,7 +52,6 @@ var (
 	NewTxBuilder                   = types.NewTxBuilder
 	NewTxBuilderFromCLI            = types.NewTxBuilderFromCLI
 	MakeSignature                  = types.MakeSignature
-	NewAccountRetriever            = types.NewAccountRetriever
 
 	// variable aliases
 	ModuleCdc                 = types.ModuleCdc
@@ -65,12 +65,14 @@ var (
 )
 
 type (
-	Account                  = exported.Account
-	VestingAccount           = exported.VestingAccount
+	Account                  = types.Account
+	VestingAccount           = types.VestingAccount
+	AccountDecoder           = types.AccountDecoder
 	BaseAccount              = types.BaseAccount
 	BaseVestingAccount       = types.BaseVestingAccount
 	ContinuousVestingAccount = types.ContinuousVestingAccount
 	DelayedVestingAccount    = types.DelayedVestingAccount
+	FeeCollectionKeeper      = types.FeeCollectionKeeper
 	GenesisState             = types.GenesisState
 	Params                   = types.Params
 	QueryAccountParams       = types.QueryAccountParams

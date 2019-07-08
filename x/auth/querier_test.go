@@ -4,11 +4,9 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/stretchr/testify/require"
-
-	abci "github.com/tendermint/tendermint/abci/types"
-
 	"github.com/cosmos/cosmos-sdk/x/auth/types"
+	"github.com/stretchr/testify/require"
+	abci "github.com/tendermint/tendermint/abci/types"
 )
 
 func Test_queryAccount(t *testing.T) {
@@ -22,13 +20,13 @@ func Test_queryAccount(t *testing.T) {
 	require.NotNil(t, err)
 	require.Nil(t, res)
 
-	req.Data = input.cdc.MustMarshalJSON(types.NewQueryAccountParams([]byte("")))
+	req.Data = input.cdc.MustMarshalJSON(NewQueryAccountParams([]byte("")))
 	res, err = queryAccount(input.ctx, req, input.ak)
 	require.NotNil(t, err)
 	require.Nil(t, res)
 
 	_, _, addr := types.KeyTestPubAddr()
-	req.Data = input.cdc.MustMarshalJSON(types.NewQueryAccountParams(addr))
+	req.Data = input.cdc.MustMarshalJSON(NewQueryAccountParams(addr))
 	res, err = queryAccount(input.ctx, req, input.ak)
 	require.NotNil(t, err)
 	require.Nil(t, res)

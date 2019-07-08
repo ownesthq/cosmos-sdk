@@ -68,14 +68,17 @@ func (AppModuleBasic) GetQueryCmd(cdc *codec.Codec) *cobra.Command {
 // app module object
 type AppModule struct {
 	AppModuleBasic
-	accountKeeper AccountKeeper
+	accountKeeper       AccountKeeper
+	feeCollectionKeeper types.FeeCollectionKeeper
 }
 
 // NewAppModule creates a new AppModule object
-func NewAppModule(accountKeeper AccountKeeper) AppModule {
+func NewAppModule(accountKeeper AccountKeeper,
+	feeCollectionKeeper types.FeeCollectionKeeper) AppModule {
 	return AppModule{
-		AppModuleBasic: AppModuleBasic{},
-		accountKeeper:  accountKeeper,
+		AppModuleBasic:      AppModuleBasic{},
+		accountKeeper:       accountKeeper,
+		feeCollectionKeeper: feeCollectionKeeper,
 	}
 }
 
@@ -105,22 +108,24 @@ func (am AppModule) NewQuerierHandler() sdk.Querier {
 
 // module init-genesis
 func (am AppModule) InitGenesis(ctx sdk.Context, data json.RawMessage) []abci.ValidatorUpdate {
-	var genesisState GenesisState
+	var genesisState types.GenesisState
 	types.ModuleCdc.MustUnmarshalJSON(data, &genesisState)
-	InitGenesis(ctx, am.accountKeeper, genesisState)
+	InitGenesis(ctx, am.accountKeeper, am.feeCollectionKeeper, genesisState)
 	return []abci.ValidatorUpdate{}
 }
 
 // module export genesis
 func (am AppModule) ExportGenesis(ctx sdk.Context) json.RawMessage {
-	gs := ExportGenesis(ctx, am.accountKeeper)
+	gs := ExportGenesis(ctx, am.accountKeeper, am.feeCollectionKeeper)
 	return types.ModuleCdc.MustMarshalJSON(gs)
 }
 
 // module begin-block
-func (AppModule) BeginBlock(_ sdk.Context, _ abci.RequestBeginBlock) {}
+func (AppModule) BeginBlock(_ sdk.Context, _ abci.RequestBeginBlock) sdk.Tags {
+	return sdk.EmptyTags()
+}
 
 // module end-block
-func (AppModule) EndBlock(_ sdk.Context, _ abci.RequestEndBlock) []abci.ValidatorUpdate {
-	return []abci.ValidatorUpdate{}
+func (AppModule) EndBlock(_ sdk.Context, _ abci.RequestEndBlock) ([]abci.ValidatorUpdate, sdk.Tags) {
+	return []abci.ValidatorUpdate{}, sdk.EmptyTags()
 }
