@@ -37,7 +37,6 @@ func (k Keeper) notBondedTokensToBonded(ctx sdk.Context, tokens sdk.Int) {
 // burnBondedTokens removes coins from the bonded pool module account
 func (k Keeper) burnBondedTokens(ctx sdk.Context, amt sdk.Int) sdk.Error {
 	if !amt.IsPositive() {
-		// skip as no coins need to be burned
 		return nil
 	}
 	coins := sdk.NewCoins(sdk.NewCoin(k.BondDenom(ctx), amt))
@@ -47,7 +46,6 @@ func (k Keeper) burnBondedTokens(ctx sdk.Context, amt sdk.Int) sdk.Error {
 // burnNotBondedTokens removes coins from the not bonded pool module account
 func (k Keeper) burnNotBondedTokens(ctx sdk.Context, amt sdk.Int) sdk.Error {
 	if !amt.IsPositive() {
-		// skip as no coins need to be burned
 		return nil
 	}
 	coins := sdk.NewCoins(sdk.NewCoin(k.BondDenom(ctx), amt))

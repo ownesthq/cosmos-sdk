@@ -52,9 +52,7 @@ CLOG            = $(TOOLS_DESTDIR)/clog
 all: tools
 
 tools: tools-stamp
-	go mod tidy
-
-tools-stamp: $(STATIK) $(GOIMPORTS)
+tools-stamp: $(STATIK) $(GOIMPORTS) $(CLOG)
 	touch $@
 
 $(GOLANGCI_LINT): $(mkfile_dir)/install-golangci-lint.sh
@@ -67,7 +65,7 @@ $(GOIMPORTS):
 	go get golang.org/x/tools/cmd/goimports@v0.0.0-20190628034336-212fb13d595e
 
 $(CLOG):
-	go get github.com/cosmos/tools/cmd/clog/
+	$(call go_install,alessio,clog,1)
 
 golangci-lint: $(GOLANGCI_LINT)
 

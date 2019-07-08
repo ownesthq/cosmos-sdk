@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
+	"github.com/tendermint/go-amino"
 
 	"github.com/cosmos/cosmos-sdk/x/genutil"
 )
@@ -90,7 +91,8 @@ func TestDummyGenesis(t *testing.T) {
 		"foo": {},
 		"bar": []byte(`{"custom": "module"}`),
 	}
-	migratedDummy := Migrate(genesisDummy)
+	cdc := amino.NewCodec()
+	migratedDummy := Migrate(genesisDummy, cdc)
 
 	// We should not touch custom modules in the map
 	require.Equal(t, genesisDummy["foo"], migratedDummy["foo"])
@@ -101,6 +103,7 @@ func TestGovGenesis(t *testing.T) {
 	genesis := genutil.AppMap{
 		"gov": basic034Gov,
 	}
+	cdc := amino.NewCodec()
 
-	require.NotPanics(t, func() { Migrate(genesis) })
+	require.NotPanics(t, func() { Migrate(genesis, cdc) })
 }

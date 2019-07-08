@@ -124,12 +124,8 @@ func CreateTestInput(t *testing.T, isCheckTx bool, initPower int64) (sdk.Context
 		bank.DefaultCodespace,
 	)
 
-	maccPerms := map[string][]string{
-		auth.FeeCollectorName:   []string{supply.Basic},
-		types.NotBondedPoolName: []string{supply.Burner, supply.Staking},
-		types.BondedPoolName:    []string{supply.Burner, supply.Staking},
-	}
-	supplyKeeper := supply.NewKeeper(cdc, keySupply, accountKeeper, bk, supply.DefaultCodespace, maccPerms)
+	supplyKeeper := supply.NewKeeper(cdc, keySupply, accountKeeper, bk, supply.DefaultCodespace,
+		[]string{auth.FeeCollectorName}, []string{}, []string{types.NotBondedPoolName, types.BondedPoolName})
 
 	initTokens := sdk.TokensFromConsensusPower(initPower)
 	initCoins := sdk.NewCoins(sdk.NewCoin(sdk.DefaultBondDenom, initTokens))
@@ -142,8 +138,8 @@ func CreateTestInput(t *testing.T, isCheckTx bool, initPower int64) (sdk.Context
 
 	// set module accounts
 	feeCollectorAcc := supply.NewEmptyModuleAccount(auth.FeeCollectorName, supply.Basic)
-	notBondedPool := supply.NewEmptyModuleAccount(types.NotBondedPoolName, supply.Burner, supply.Staking)
-	bondPool := supply.NewEmptyModuleAccount(types.BondedPoolName, supply.Burner, supply.Staking)
+	notBondedPool := supply.NewEmptyModuleAccount(types.NotBondedPoolName, supply.Burner)
+	bondPool := supply.NewEmptyModuleAccount(types.BondedPoolName, supply.Burner)
 
 	err = notBondedPool.SetCoins(totalSupply)
 	require.NoError(t, err)

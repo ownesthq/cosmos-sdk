@@ -18,7 +18,6 @@ const (
 	Basic        = types.Basic
 	Minter       = types.Minter
 	Burner       = types.Burner
-	Staking      = types.Staking
 )
 
 var (

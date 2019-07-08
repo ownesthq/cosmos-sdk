@@ -182,6 +182,7 @@ var (
 
 	// variable aliases
 	ModuleCdc                        = types.ModuleCdc
+	PoolKey                          = types.PoolKey
 	LastValidatorPowerKey            = types.LastValidatorPowerKey
 	LastTotalPowerKey                = types.LastTotalPowerKey
 	ValidatorsKey                    = types.ValidatorsKey

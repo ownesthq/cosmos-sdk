@@ -6,6 +6,5 @@ import "github.com/cosmos/cosmos-sdk/x/auth/exported"
 type ModuleAccountI interface {
 	exported.Account
 	GetName() string
-	GetPermissions() []string
-	HasPermission(string) bool
+	GetPermission() string
 }

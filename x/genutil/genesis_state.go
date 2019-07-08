@@ -15,7 +15,7 @@ import (
 
 // State to Unmarshal
 type GenesisState struct {
-	GenTxs []json.RawMessage `json:"gentxs" yaml:"gentxs"`
+	GenTxs []json.RawMessage `json:"gentxs"`
 }
 
 // NewGenesisState creates a new GenesisState object

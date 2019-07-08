@@ -50,7 +50,6 @@ go-mod-cache: go.sum
 go.sum: go.mod
 	@echo "--> Ensure dependencies have not been modified"
 	@go mod verify
-	@go mod tidy
 
 clean:
 	rm -rf snapcraft-local.yaml build/
@@ -126,9 +125,8 @@ test_sim_benchmark_invariants:
 
 # Don't move it into tools - this will be gone once gaia has moved into the new repo
 runsim: $(BINDIR)/runsim
-$(BINDIR)/runsim:
-	go get github.com/cosmos/tools/cmd/runsim/
-	go mod tidy
+$(BINDIR)/runsim: contrib/runsim/main.go contrib/runsim/notification.go
+	go install github.com/cosmos/cosmos-sdk/contrib/runsim
 
 SIM_NUM_BLOCKS ?= 500
 SIM_BLOCK_SIZE ?= 200

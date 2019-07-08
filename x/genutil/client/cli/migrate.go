@@ -49,7 +49,7 @@ $ %s migrate v0.36 /path/to/genesis.json --chain-id=cosmoshub-3 --genesis-time=2
 				return fmt.Errorf("unknown migration function version: %s", target)
 			}
 
-			newGenState := migrationMap[target](initialState)
+			newGenState := migrationMap[target](initialState, cdc)
 			genDoc.AppState = cdc.MustMarshalJSON(newGenState)
 
 			genesisTime := cmd.Flag(flagGenesisTime).Value.String()
